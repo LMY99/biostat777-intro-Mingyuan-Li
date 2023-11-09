@@ -1,0 +1,13 @@
+---
+title: "Example Analysis"
+---
+
+We hereby analyze the dataset **mtcars**, which contains data extracted from 1974 *Motor Trend* US magazine containing fuel consumption and aspects of automobile design and performace for 32 automobiles.
+
+-   **The question we aim to answer:** We aim to find the relationship between the fuel consumption of cars, measured with **miles per US Gallon**, and the design of automobiles.
+
+-   **Intended Audience:** This analysis is meant for statisticians as well as people interested in automobiles.
+
+-   **Data Source:** The dataset is extracted from 1974 *Motor Trend* US magazine containing fuel consumption and aspects of automobile design and performace for 32 automobiles. It is available in the **datasets** package which is a built-in package in **R** programming language. A reference to the data is *Henderson and Velleman (1981), Building multiple regression models interactively. Biometrics, 37, 391--411.(doi: https://doi.org/10.2307/2530428)* [link to doi](https://doi.org/10.2307/2530428)
+
+-   **Data Dictionary**: The data contains 32 observations with 11 numeric variables. A link to a description of the data with data dictionary is [here](https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/mtcars) (https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/mtcars)

@@ -1,0 +1,5 @@
+---
+title: "About"
+---
+
+I am a current PhD student at Department of Biostatistics, Johns Hopkins University. Before that, I graduated from Peking University with a Bachelor's Degree in statistics and then received a Master's Degree in biostatistics from Johns Hopkins University. My research interest includes Bayesian statistics and chronic diseases, and I am currently seeking research opportunities on functional data analysis and wearable devices. My master's thesis is on the quantification of disease progression of Alzheimer's Disease. I decide to work in academia as a researcher after graduation.
