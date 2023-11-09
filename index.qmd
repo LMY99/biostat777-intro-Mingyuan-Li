@@ -6,4 +6,4 @@ Hello! You have reached Mingyuan Li's website!
 
 I am a first-year PhD student in Department of Biostatistics, Bloomberg School of Public Health, Johns Hopkins University. I enjoy a bit of classical music and short hiking trips, and I am also a fan of travelling!
 
-
+![Me at Santa Monica pier watching sunset!](SantaMonica.jpg)
