@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>MingyuanLiWebsite - Example Analysis</title>
+<title>Mingyuan Li’s Personal Website - Example Analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,7 +20,60 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -72,7 +125,7 @@ ul.task-list li input[type="checkbox"] {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">MingyuanLiWebsite</span>
+    <span class="navbar-title">Mingyuan Li’s Personal Website</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -108,7 +161,7 @@ ul.task-list li input[type="checkbox"] {
         
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -127,10 +180,538 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
+<p>We hereby analyze the dataset <strong>mtcars</strong>, which contains data extracted from 1974 <em>Motor Trend</em> US magazine containing fuel consumption and aspects of automobile design and performace for 32 automobiles.</p>
+<ul>
+<li><strong>The question we aim to answer:</strong> We aim to find the relationship between the fuel consumption of cars, measured with <strong>miles per US Gallon(MPG)</strong>, and the design of automobiles.</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Note that larger values of miles per gallon indicates lower consumption of fuel over the same distance. The inverse of that value can be regarded as the fuel efficiency of the automobiles.</p>
+</div>
+</div>
+<ul>
+<li><p><strong>Intended Audience:</strong> This analysis is meant for statisticians as well as people interested in automobiles.</p></li>
+<li><p><strong>Data Source:</strong> The dataset is extracted from 1974 <em>Motor Trend</em> US magazine containing fuel consumption and aspects of automobile design and performace for 32 automobiles. It is available in the <strong>datasets</strong> package which is a built-in package in <strong>R</strong> programming language. A reference to the data is <em>Henderson and Velleman (1981), Building multiple regression models interactively. Biometrics, 37, 391–411.(doi: https://doi.org/10.2307/2530428)</em> <a href="https://doi.org/10.2307/2530428">link to doi</a><span class="citation" data-cites="HendersonMTCARS">(<a href="#ref-HendersonMTCARS" role="doc-biblioref">Henderson and Velleman 1981</a>)</span> <span class="citation" data-cites="Rmtcars">(<a href="#ref-Rmtcars" role="doc-biblioref">n.d.</a>)</span></p></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="mtcarsimage.jpg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Table of the original data cropped from Henderson, 1981</figcaption>
+</figure>
+</div>
+<ul>
+<li><p><strong>Data Dictionary</strong>: The data contains 32 observations with 11 numeric variables. A link to a description of the data with data dictionary is <a href="https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/mtcars">here</a> (https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/mtcars)</p></li>
+<li><p><strong>Exploratory Data Analysis</strong></p></li>
+</ul>
+<div class="cell page-columns page-full">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"mtcars"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Recode the data for clarity</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>mtcars_df <span class="ot">&lt;-</span> mtcars <span class="sc">%&gt;%</span> </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">vs=</span><span class="fu">factor</span>(vs,<span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>,<span class="fu">c</span>(<span class="st">"V-shaped"</span>,<span class="st">"Straight"</span>)),</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">am=</span><span class="fu">factor</span>(am,<span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>,<span class="fu">c</span>(<span class="st">"Automatic"</span>,<span class="st">"Manual"</span>))</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">weight=</span>wt,<span class="at">engine=</span>vs,<span class="at">transmission=</span>am)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(mtcars_df[,<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">8</span>,<span class="dv">9</span>)])</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+<div class="no-row-height column-margin column-container"><div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">mpg</th>
+<th style="text-align: left;">engine</th>
+<th style="text-align: left;">transmission</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Mazda RX4</td>
+<td style="text-align: right;">21.0</td>
+<td style="text-align: left;">V-shaped</td>
+<td style="text-align: left;">Manual</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mazda RX4 Wag</td>
+<td style="text-align: right;">21.0</td>
+<td style="text-align: left;">V-shaped</td>
+<td style="text-align: left;">Manual</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Datsun 710</td>
+<td style="text-align: right;">22.8</td>
+<td style="text-align: left;">Straight</td>
+<td style="text-align: left;">Manual</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hornet 4 Drive</td>
+<td style="text-align: right;">21.4</td>
+<td style="text-align: left;">Straight</td>
+<td style="text-align: left;">Automatic</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Hornet Sportabout</td>
+<td style="text-align: right;">18.7</td>
+<td style="text-align: left;">V-shaped</td>
+<td style="text-align: left;">Automatic</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Valiant</td>
+<td style="text-align: right;">18.1</td>
+<td style="text-align: left;">Straight</td>
+<td style="text-align: left;">Automatic</td>
+</tr>
+</tbody>
+</table>
+</div></div></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Average MPG for different number of cylinders</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>mtcars_df <span class="sc">%&gt;%</span> </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(cyl) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_mpg=</span><span class="fu">mean</span>(mpg),<span class="at">count=</span><span class="fu">n</span>())</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: right;">cyl</th>
+<th style="text-align: right;">avg_mpg</th>
+<th style="text-align: right;">count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">26.66364</td>
+<td style="text-align: right;">11</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">19.74286</td>
+<td style="text-align: right;">7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">15.10000</td>
+<td style="text-align: right;">14</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Average MPG for engine and transmission category</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>mtcars_df <span class="sc">%&gt;%</span> </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(engine,transmission) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_mpg=</span><span class="fu">mean</span>(mpg),<span class="at">count=</span><span class="fu">n</span>())</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'engine'. You can override using the
+`.groups` argument.</code></pre>
+</div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">engine</th>
+<th style="text-align: left;">transmission</th>
+<th style="text-align: right;">avg_mpg</th>
+<th style="text-align: right;">count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">V-shaped</td>
+<td style="text-align: left;">Automatic</td>
+<td style="text-align: right;">15.05000</td>
+<td style="text-align: right;">12</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">V-shaped</td>
+<td style="text-align: left;">Manual</td>
+<td style="text-align: right;">19.75000</td>
+<td style="text-align: right;">6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Straight</td>
+<td style="text-align: left;">Automatic</td>
+<td style="text-align: right;">20.74286</td>
+<td style="text-align: right;">7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Straight</td>
+<td style="text-align: left;">Manual</td>
+<td style="text-align: right;">28.37143</td>
+<td style="text-align: right;">7</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Graphing MPG vs weight, displacement and horsepower grouped by cylinder number</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>mtcars_df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">cyl=</span><span class="fu">factor</span>(cyl)) <span class="sc">%&gt;%</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>weight,<span class="at">y=</span>mpg,<span class="at">group=</span>cyl,<span class="at">col=</span>cyl)) <span class="sc">+</span> </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">formula=</span>y<span class="sc">~</span>x,<span class="at">method=</span><span class="st">'lm'</span>,<span class="at">se=</span><span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Weight"</span>) <span class="sc">+</span> </span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Miles Per Gallon"</span>) <span class="sc">+</span> </span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Relationship between fuel consumption and weight of automobiles"</span>,</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle=</span><span class="st">"Grouped by number of cylinders"</span>,</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption=</span><span class="st">"Plotted from dataset mtcars. Linear regression fit is graphed for each group."</span>,</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">color=</span><span class="st">"Number of Cylinders"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="demoanalysis_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>mtcars_df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">cyl=</span><span class="fu">factor</span>(cyl)) <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>disp,<span class="at">y=</span>mpg,<span class="at">group=</span>cyl,<span class="at">col=</span>cyl)) <span class="sc">+</span> </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">formula=</span>y<span class="sc">~</span>x,<span class="at">method=</span><span class="st">'lm'</span>,<span class="at">se=</span><span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Displacement"</span>) <span class="sc">+</span> </span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Miles Per Gallon"</span>) <span class="sc">+</span> </span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Relationship between fuel consumption and displacement of automobiles"</span>,</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle=</span><span class="st">"Grouped by number of cylinders"</span>,</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption=</span><span class="st">"Plotted from dataset mtcars. Linear regression fit is graphed for each group."</span>,</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">color=</span><span class="st">"Number of Cylinders"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="demoanalysis_files/figure-html/unnamed-chunk-2-2.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>mtcars_df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">cyl=</span><span class="fu">factor</span>(cyl)) <span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>hp,<span class="at">y=</span>mpg,<span class="at">group=</span>cyl,<span class="at">col=</span>cyl)) <span class="sc">+</span> </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">formula=</span>y<span class="sc">~</span>x,<span class="at">method=</span><span class="st">'lm'</span>,<span class="at">se=</span><span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Gross Horsepower"</span>) <span class="sc">+</span> </span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Miles Per Gallon"</span>) <span class="sc">+</span> </span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Relationship between fuel consumption and horsepower of automobiles"</span>,</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle=</span><span class="st">"Grouped by number of cylinders"</span>,</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption=</span><span class="st">"Plotted from dataset mtcars. Linear regression fit is graphed for each group."</span>,</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">color=</span><span class="st">"Number of Cylinders"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="demoanalysis_files/figure-html/unnamed-chunk-2-3.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Density plot of MPG grouped by Engine and Transmission</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>mtcars_df <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>mpg)) <span class="sc">+</span> <span class="fu">geom_density</span>() <span class="sc">+</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="at">rows=</span><span class="fu">vars</span>(engine),<span class="at">cols=</span><span class="fu">vars</span>(transmission)) <span class="sc">+</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Miles Per Gallon"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Probability Density Function"</span>) <span class="sc">+</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Distribution of Fuel Consumption"</span>,</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle=</span><span class="st">"Grouped by engine(V-shaped/Straight) and transmission(Automatic/Manual)"</span>,</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption=</span><span class="st">"Data Source: mtcars"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="demoanalysis_files/figure-html/unnamed-chunk-2-4.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We can see that fewer cylinders are associated with both lower displacement, lower weight, higher MPG and lower gross horsepower. So cylinder number is a confounder since it relates with both the outcome of interest(in this case, MPG) and other independent variables, and a reasonable thing to do is to include cylinder number into statistical models.</p>
+</div>
+</div>
+<ul>
+<li><strong>Statistical Modelling:</strong></li>
+</ul>
+<p>We now fit a linear model to find the relationship between MPG and other characteristics of automobiles, and then attempt to select a subset of variables by stepwise selection<span class="citation" data-cites="Stepwise">(<a href="#ref-Stepwise" role="doc-biblioref">Marhuenda, Morales, and del Carmen Pardo 2014</a>)</span>, in order to simplify the model without losing too much accuracy. Akaike’s Information Criteria is used to represent the model’s accuracy while penalizing more complex models.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(mpg<span class="sc">~</span>., mtcars_df)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = mpg ~ ., data = mtcars_df)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-3.4506 -1.6044 -0.1196  1.2193  4.6271 
+
+Coefficients:
+                   Estimate Std. Error t value Pr(&gt;|t|)  
+(Intercept)        12.30337   18.71788   0.657   0.5181  
+cyl                -0.11144    1.04502  -0.107   0.9161  
+disp                0.01334    0.01786   0.747   0.4635  
+hp                 -0.02148    0.02177  -0.987   0.3350  
+drat                0.78711    1.63537   0.481   0.6353  
+weight             -3.71530    1.89441  -1.961   0.0633 .
+qsec                0.82104    0.73084   1.123   0.2739  
+engineStraight      0.31776    2.10451   0.151   0.8814  
+transmissionManual  2.52023    2.05665   1.225   0.2340  
+gear                0.65541    1.49326   0.439   0.6652  
+carb               -0.19942    0.82875  -0.241   0.8122  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 2.65 on 21 degrees of freedom
+Multiple R-squared:  0.869, Adjusted R-squared:  0.8066 
+F-statistic: 13.93 on 10 and 21 DF,  p-value: 3.793e-07</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>model_step <span class="ot">&lt;-</span> <span class="fu">step</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Start:  AIC=70.9
+mpg ~ cyl + disp + hp + drat + weight + qsec + engine + transmission + 
+    gear + carb
+
+               Df Sum of Sq    RSS    AIC
+- cyl           1    0.0799 147.57 68.915
+- engine        1    0.1601 147.66 68.932
+- carb          1    0.4067 147.90 68.986
+- gear          1    1.3531 148.85 69.190
+- drat          1    1.6270 149.12 69.249
+- disp          1    3.9167 151.41 69.736
+- hp            1    6.8399 154.33 70.348
+- qsec          1    8.8641 156.36 70.765
+&lt;none&gt;                      147.49 70.898
+- transmission  1   10.5467 158.04 71.108
+- weight        1   27.0144 174.51 74.280
+
+Step:  AIC=68.92
+mpg ~ disp + hp + drat + weight + qsec + engine + transmission + 
+    gear + carb
+
+               Df Sum of Sq    RSS    AIC
+- engine        1    0.2685 147.84 66.973
+- carb          1    0.5201 148.09 67.028
+- gear          1    1.8211 149.40 67.308
+- drat          1    1.9826 149.56 67.342
+- disp          1    3.9009 151.47 67.750
+- hp            1    7.3632 154.94 68.473
+&lt;none&gt;                      147.57 68.915
+- qsec          1   10.0933 157.67 69.032
+- transmission  1   11.8359 159.41 69.384
+- weight        1   27.0280 174.60 72.297
+
+Step:  AIC=66.97
+mpg ~ disp + hp + drat + weight + qsec + transmission + gear + 
+    carb
+
+               Df Sum of Sq    RSS    AIC
+- carb          1    0.6855 148.53 65.121
+- gear          1    2.1437 149.99 65.434
+- drat          1    2.2139 150.06 65.449
+- disp          1    3.6467 151.49 65.753
+- hp            1    7.1060 154.95 66.475
+&lt;none&gt;                      147.84 66.973
+- transmission  1   11.5694 159.41 67.384
+- qsec          1   15.6830 163.53 68.200
+- weight        1   27.3799 175.22 70.410
+
+Step:  AIC=65.12
+mpg ~ disp + hp + drat + weight + qsec + transmission + gear
+
+               Df Sum of Sq    RSS    AIC
+- gear          1     1.565 150.09 63.457
+- drat          1     1.932 150.46 63.535
+&lt;none&gt;                      148.53 65.121
+- disp          1    10.110 158.64 65.229
+- transmission  1    12.323 160.85 65.672
+- hp            1    14.826 163.35 66.166
+- qsec          1    26.408 174.94 68.358
+- weight        1    69.127 217.66 75.350
+
+Step:  AIC=63.46
+mpg ~ disp + hp + drat + weight + qsec + transmission
+
+               Df Sum of Sq    RSS    AIC
+- drat          1     3.345 153.44 62.162
+- disp          1     8.545 158.64 63.229
+&lt;none&gt;                      150.09 63.457
+- hp            1    13.285 163.38 64.171
+- transmission  1    20.036 170.13 65.466
+- qsec          1    25.574 175.67 66.491
+- weight        1    67.572 217.66 73.351
+
+Step:  AIC=62.16
+mpg ~ disp + hp + weight + qsec + transmission
+
+               Df Sum of Sq    RSS    AIC
+- disp          1     6.629 160.07 61.515
+&lt;none&gt;                      153.44 62.162
+- hp            1    12.572 166.01 62.682
+- qsec          1    26.470 179.91 65.255
+- transmission  1    32.198 185.63 66.258
+- weight        1    69.043 222.48 72.051
+
+Step:  AIC=61.52
+mpg ~ hp + weight + qsec + transmission
+
+               Df Sum of Sq    RSS    AIC
+- hp            1     9.219 169.29 61.307
+&lt;none&gt;                      160.07 61.515
+- qsec          1    20.225 180.29 63.323
+- transmission  1    25.993 186.06 64.331
+- weight        1    78.494 238.56 72.284
+
+Step:  AIC=61.31
+mpg ~ weight + qsec + transmission
+
+               Df Sum of Sq    RSS    AIC
+&lt;none&gt;                      169.29 61.307
+- transmission  1    26.178 195.46 63.908
+- qsec          1   109.034 278.32 75.217
+- weight        1   183.347 352.63 82.790</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(model_step<span class="sc">$</span>anova)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Step</th>
+<th style="text-align: right;">Df</th>
+<th style="text-align: right;">Deviance</th>
+<th style="text-align: right;">Resid. Df</th>
+<th style="text-align: right;">Resid. Dev</th>
+<th style="text-align: right;">AIC</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: right;">147.4944</td>
+<td style="text-align: right;">70.89774</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">- cyl</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.0798712</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">147.5743</td>
+<td style="text-align: right;">68.91507</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">- engine</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.2685228</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">147.8428</td>
+<td style="text-align: right;">66.97324</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">- carb</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.6854608</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">148.5283</td>
+<td style="text-align: right;">65.12126</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">- gear</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.5649705</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">150.0933</td>
+<td style="text-align: right;">63.45667</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">- drat</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3.3445512</td>
+<td style="text-align: right;">26</td>
+<td style="text-align: right;">153.4378</td>
+<td style="text-align: right;">62.16190</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">- disp</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">6.6286537</td>
+<td style="text-align: right;">27</td>
+<td style="text-align: right;">160.0665</td>
+<td style="text-align: right;">61.51530</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">- hp</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">9.2194693</td>
+<td style="text-align: right;">28</td>
+<td style="text-align: right;">169.2859</td>
+<td style="text-align: right;">61.30730</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the simplified subset model </span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(mpg<span class="sc">~</span>weight<span class="sc">+</span>qsec<span class="sc">+</span>transmission,mtcars_df))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = mpg ~ weight + qsec + transmission, data = mtcars_df)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-3.4811 -1.5555 -0.7257  1.4110  4.6610 
+
+Coefficients:
+                   Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)          9.6178     6.9596   1.382 0.177915    
+weight              -3.9165     0.7112  -5.507 6.95e-06 ***
+qsec                 1.2259     0.2887   4.247 0.000216 ***
+transmissionManual   2.9358     1.4109   2.081 0.046716 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 2.459 on 28 degrees of freedom
+Multiple R-squared:  0.8497,    Adjusted R-squared:  0.8336 
+F-statistic: 52.75 on 3 and 28 DF,  p-value: 1.21e-11</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>From the model, we see that only weight appears weakly significant(we use “weakly” since common choices of significance level is 0.05 or lower) and other variables all appear non-significant. But after using stepwise selection, everything except weight, qsec and transmission is removed one by one, making the rest of the variables all significant. And note that the simplified model explained 85% of the variability in MPG, whereas the full model explained 87%, which is not really a big loss in accuracy.</p>
+</div>
+</div>
+<ul>
+<li><strong>Summary:</strong></li>
+</ul>
+<p>Exploratory analysis showed that manual transmission, straight engines and smaller number of cylinders are associated with higher MPG and thus lower fuel consumption. The graph of the data suggests correlation among MPG, cylinder numbers and other variables, suggesting strong confounding in the data. After fitting the linear model and performing variable selection, weight, quarter-mile time and transmission type remained as the significant predictors. When other variables are fixed, for any 1000 pounds increased in weight, MPG decreases by 3.9 by average. Cars with manual transmission traverses 2.94 miles per gallon more than those with automatic transmission with other characteristics being the same. Any unit increase in quarter-mile time is associated with 1.22 increase in MPG when weight and transmissions are fixed.</p>
+<ul>
+<li><strong>R Functions Applied</strong></li>
+</ul>
+<p><strong>DPLYR:</strong> group_by(), summarise(), n(), mutate(), rename()</p>
+<p><strong>TIDYR:</strong> Pipe operator %&gt;%</p>
+<p><strong>GGPLOT2:</strong> geom_point(), geom_smooth(), geom_density(), facet_grid()</p>
+<ul>
+<li><strong>Reference:</strong></li>
+</ul>
 
 
 
-</main> <!-- /main -->
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-Rmtcars" class="csl-entry" role="listitem">
+n.d. <em>R: Motor Trend Car Road Tests</em>. <a href="https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/mtcars.html">https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/mtcars.html</a>.
+</div>
+<div id="ref-HendersonMTCARS" class="csl-entry" role="listitem">
+Henderson, Harold V., and Paul F. Velleman. 1981. <span>“Building Multiple Regression Models Interactively.”</span> <em>Biometrics</em> 37 (2): 391–411. <a href="http://www.jstor.org/stable/2530428">http://www.jstor.org/stable/2530428</a>.
+</div>
+<div id="ref-Stepwise" class="csl-entry" role="listitem">
+Marhuenda, Yolanda, Domingo Morales, and María del Carmen Pardo. 2014. <span>“Information Criteria for Fay–Herriot Model Selection.”</span> <em>Computational Statistics &amp; Data Analysis</em> 70: 268–80. https://doi.org/<a href="https://doi.org/10.1016/j.csda.2013.09.016">https://doi.org/10.1016/j.csda.2013.09.016</a>.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

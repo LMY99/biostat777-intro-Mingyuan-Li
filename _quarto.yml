@@ -2,7 +2,7 @@ project:
   type: website
 
 website:
-  title: "MingyuanLiWebsite"
+  title: "Mingyuan Li's Personal Website"
   navbar:
     left:
       - href: index.qmd
